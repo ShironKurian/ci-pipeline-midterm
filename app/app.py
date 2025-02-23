@@ -6,28 +6,27 @@ app = Flask(__name__)
 def add():
     a = request.args.get('a', type=int)
     b = request.args.get('b', type=int)
-    return jsonify({'result': a + b})
+    return jsonify({"result": a + b})
 
 @app.route('/subtract', methods=['GET'])
 def subtract():
     a = request.args.get('a', type=int)
     b = request.args.get('b', type=int)
-    return jsonify({'result': a - b})
+    return jsonify({"result": a - b})
 
 @app.route('/multiply', methods=['GET'])
 def multiply():
     a = request.args.get('a', type=int)
     b = request.args.get('b', type=int)
-    return jsonify({'result': a * b})
+    return jsonify({"result": a * b})
 
 @app.route('/divide', methods=['GET'])
 def divide():
     a = request.args.get('a', type=int)
     b = request.args.get('b', type=int)
     if b == 0:
-        return jsonify({'error': 'Division by zero is not allowed'}), 400
-    return jsonify({'result': a / b})
+        return jsonify({"error": "Division by zero is not allowed"}), 400
+    return jsonify({"result": a / b})
 
-# Expose the app for testing
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
