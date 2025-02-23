@@ -43,3 +43,7 @@ jobs:
         docker tag flask-calculator:latest $DOCKER_USERNAME/flask-calculator:latest
         docker push $DOCKER_USERNAME/flask-calculator:latest
 
+    - name: Install Dependencies
+      run: |
+       python -m pip install --upgrade pip
+       pip install -r requirements.txt
