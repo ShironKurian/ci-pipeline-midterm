@@ -66,6 +66,32 @@ curl "http://localhost:5000/add?a=5&b=3"
 
 ## 🐳 Docker Setup
 
+Docker Image
+The Docker image for this project is built automatically by our CI pipeline and pushed to Docker Hub. Follow the steps below to pull and run the Docker container:
+
+Pulling the Image
+To pull the latest version of the Docker image from Docker Hub, run:
+
+docker pull shironkurian/ci-pipeline-midterm:latest
+Running the Container
+After pulling the image, you can run it locally by mapping the container's port 5000 to your local machine. For example:
+
+docker run -p 5000:5000 shironkurian/ci-pipeline-midterm:latest
+Once the container is running, access the application by opening your web browser and navigating to:
+
+http://localhost:5000/add?a=5&b=3
+You should see a JSON response similar to:
+
+json
+Copy
+Edit
+{"result": 8}
+Additional Information
+Image Name: shironkurian/ci-pipeline-midterm
+Tag: latest
+Base Image: python:3.12-slim
+CI/CD: The image is built and pushed automatically via our GitHub Actions workflow after all tests pass.
+
 1. **Build the Docker image:**
 ```bash
 docker build -t flask-app .
@@ -108,6 +134,8 @@ The project uses GitHub Actions to automate:
 ## 📄 Workflow File (ci.yml)
 
 Located in `.github/workflows/ci.yml`, this file automates the build, test, and deploy steps whenever code is pushed.
+
+
 
 ## Contributors
 
