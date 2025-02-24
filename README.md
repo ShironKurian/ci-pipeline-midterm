@@ -1,97 +1,118 @@
-# ci-pipeline-midterm
-Midterm Practical for CI Pipeline with GitHub Actions
-CI Pipeline for Flask Application
-Overview
-This project sets up a Continuous Integration (CI) pipeline for a simple Flask application using GitHub Actions. The pipeline performs the following tasks:
+# Flask Calculator App with CI/CD Pipeline
 
-Builds the application
-Runs unit tests
-Uploads the application as a Docker image to Docker Hub
-Directory Structure
-bash
-Copy
-Edit
+## 📘 Project Overview
+
+This project is a simple Flask web application that performs basic arithmetic operations: addition, subtraction, multiplication, and division. It also includes a CI/CD pipeline using GitHub Actions and Docker to automate testing and deployment.
+
+## 🛠️ Features
+
+- Perform basic arithmetic operations via REST API
+- Unit testing with pytest
+- Containerized with Docker
+- Automated CI/CD pipeline
+
+## 📂 Project Structure
+
+```
 ci-pipeline-midterm/
 ├── app/
-│   ├── app.py                 # Flask application
-│   ├── Dockerfile             # Docker instructions
-│   ├── requirements.txt       # Python dependencies
-│
+│   ├── app.py                # Main Flask app
+│   └── __init__.py          # Init file for module recognition
 ├── tests/
-│   ├── test_app.py            # Unit tests
-│   └── __init__.py            # Marks this as a package
-│
+│   └── test_app.py          # Test cases for API endpoints
+├── Dockerfile               # Docker configuration file
 ├── .github/
 │   └── workflows/
-│       └── ci.yml             # GitHub Actions CI pipeline
-│
-├── README.md                  # Documentation
-└── .gitignore                 # Ignored files
-Setup Instructions
-1. Clone the Repository
-bash
-Copy
-Edit
-git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-cd YOUR_REPOSITORY
-2. Install Dependencies
-Ensure you have Python 3 and pip installed. Run:
+│       └── ci.yml           # GitHub Actions workflow
+├── requirements.txt         # Python dependencies
+└── README.md                # Project documentation
+```
 
-bash
-Copy
-Edit
-pip install -r app/requirements.txt
-3. Run the Flask Application
-bash
-Copy
-Edit
+## API Endpoints
+
+- **Addition:** `GET /add?a=5&b=3` → `{ "result": 8 }`
+- **Subtraction:** `GET /subtract?a=10&b=4` → `{ "result": 6 }`
+- **Multiplication:** `GET /multiply?a=3&b=3` → `{ "result": 9 }`
+- **Division:** `GET /divide?a=10&b=2` → `{ "result": 5 }`
+
+## How to Run the Application
+
+1. **Clone the repository:**
+```bash
+git clone https://github.com/your-username/ci-pipeline-midterm.git
+cd ci-pipeline-midterm
+```
+
+2. **Set up a virtual environment:**
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+3. **Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+4. **Run the Flask app:**
+```bash
 python app/app.py
-Access the application at http://127.0.0.1:5000.
+```
 
-4. Run Unit Tests
-bash
-Copy
-Edit
+5. **Test the endpoints:**
+```bash
+curl "http://localhost:5000/add?a=5&b=3"
+```
+
+## 🐳 Docker Setup
+
+1. **Build the Docker image:**
+```bash
+docker build -t flask-app .
+```
+
+2. **Run the container:**
+```bash
+docker run -p 5000:5000 flask-app
+```
+
+3. **Access the API:**
+```bash
+curl "http://localhost:5000/add?a=5&b=3"
+```
+
+## ✅ Testing with Pytest
+
+1. **Run tests locally:**
+```bash
 pytest tests/
-Docker Setup
-1. Build the Docker Image
-bash
-Copy
-Edit
-docker build -t your-dockerhub-username/flask-app:v1 app/
-2. Run the Docker Container
-bash
-Copy
-Edit
-docker run -p 5000:5000 your-dockerhub-username/flask-app:v1
-Now visit http://127.0.0.1:5000.
+```
 
-3. Push Docker Image to Docker Hub
-Ensure you are logged in:
+2. **Run tests inside Docker:**
+```bash
+docker exec <container_id> pytest tests/
+```
 
-bash
-Copy
-Edit
-docker login
-Then push the image:
+## 🛠️ CI/CD Pipeline (GitHub Actions)
 
-bash
-Copy
-Edit
-docker push your-dockerhub-username/flask-app:v1
-GitHub Actions CI Pipeline
-The CI pipeline is defined in .github/workflows/ci.yml. It automates the following:
+The project uses GitHub Actions to automate:
+- **Build:** Create Docker images
+- **Test:** Run the test suite
+- **Deploy:** Push Docker images to Docker Hub (on passing tests)
 
-Build Phase: Installs dependencies and builds the application
-Test Phase: Runs unit tests and ensures all tests pass
-Upload Phase: Builds and pushes the Docker image to Docker Hub
-Trigger
-The workflow runs on every push or pull request to the main branch.
+### Configure GitHub Secrets
 
-Jenkins Pipeline (Bonus Task)
-If using Jenkins, create a Jenkinsfile in the root directory with equivalent stages:
+- `DOCKER_USERNAME`: Your Docker Hub username
+- `DOCKER_PASSWORD`: Your Docker Hub password or access token
 
-Build Stage: Install dependencies
-Test Stage: Run unit tests
-Upload Stage: Push Docker image to Docker Hub
-Ensure Jenkins is properly configured with the necessary credentials.
+## 📄 Workflow File (ci.yml)
+
+Located in `.github/workflows/ci.yml`, this file automates the build, test, and deploy steps whenever code is pushed.
+
+## Contributors
+
+- **Shiron Kurian** 
+
+## 🏁 Conclusion
+
+This project demonstrates a complete web application lifecycle — from development to deployment — using Flask, Docker, and GitHub Actions. It's a solid foundation for learning CI/CD and cloud-native development
